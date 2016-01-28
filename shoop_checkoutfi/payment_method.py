@@ -24,6 +24,7 @@ TEMPLATE = """
 
 
 def flatten_unicode(string):
+    string = force_text(string)
     return force_text(unicodedata.normalize("NFKD", string).encode("ascii", "ignore"))
 
 
