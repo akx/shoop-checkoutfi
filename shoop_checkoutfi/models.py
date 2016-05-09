@@ -1,14 +1,17 @@
-# -- encoding: UTF-8 --
-from __future__ import unicode_literals
-from .checkoutfi import Checkout, Payment, Contact
-from django.contrib import messages
-from django.forms import Form, CharField, HiddenInput
-from django.http.response import HttpResponse
-from django.utils.encoding import force_text
-from shoop.core.methods.base import BasePaymentMethodModule
-from shoop.utils.excs import Problem
 import datetime
 import unicodedata
+
+from django.contrib import messages
+from django.db import models
+from django.forms import CharField, Form, HiddenInput
+from django.http import HttpResponse
+from django.utils.encoding import force_text
+from django.utils.translation import ugettext_lazy as _
+
+from shoop.core.models import PaymentProcessor, ServiceChoice
+from shoop.utils.excs import Problem
+from shoop_checkoutfi.checkoutfi import Checkout, Contact, Payment
+
 
 TEMPLATE = """
 <html>
@@ -28,23 +31,23 @@ def flatten_unicode(string):
     return force_text(unicodedata.normalize("NFKD", string).encode("ascii", "ignore"))
 
 
-class CheckoutFiPaymentMethodModule(BasePaymentMethodModule):
-    identifier = "checkoutfi"
-    name = "Checkout.fi"
-    option_fields = BasePaymentMethodModule.option_fields + [
-        ("merchant_id", CharField(label="Merchant ID", required=True)),
-        ("merchant_secret", CharField(label="Merchant Secret", required=True))
-    ]
+class CheckoutFiPaymentProcessor(PaymentProcessor):
+    merchant_id = models.CharField(verbose_name="Merchant ID", max_length=128)
+    merchant_secret = models.CharField(verbose_name="Merchant Secret", max_length=128)
 
-    def _get_checkout_object(self):
-        options = self.get_options()
+    def get_service_choices(self):
+        return [
+            ServiceChoice('checkoutfi', _("Checkout.fi"))
+        ]
+
+    def _get_checkout_object(self, service):
         return Checkout(
-            merchant_id=options["merchant_id"],
-            merchant_secret=options["merchant_secret"],
+            merchant_id=self.merchant_id,
+            merchant_secret=self.merchant_secret,
         )
 
-    def process_payment_return_request(self, order, request):
-        checkout = self._get_checkout_object()
+    def process_payment_return_request(self, service, order, request):
+        checkout = self._get_checkout_object(service)
         fields = {
             "version": request.REQUEST.get("VERSION"),
             "order_number": request.REQUEST.get("STAMP"),
@@ -54,13 +57,18 @@ class CheckoutFiPaymentMethodModule(BasePaymentMethodModule):
             "algorithm": request.REQUEST.get("ALGORITHM"),
             "mac": request.REQUEST.get("MAC"),
         }
+
         if not all(fields.values()):
             messages.warning(request, u"Arvoja puuttuu.")
             return
+
         status = int(fields["status"])
+
         if status < 0:
             messages.warning(request, u"Peruit maksamisen. Yritä uudestaan.")
             return
+
+        # these are approved statuses
         if status in (2, 3, 5, 6, 8, 9, 10):
             if checkout.validate_payment_return(**fields):
                 payment_id = fields["payment"]
@@ -72,18 +80,19 @@ class CheckoutFiPaymentMethodModule(BasePaymentMethodModule):
             else:
                 messages.warning(request, u"Maksun validointi epäonnistui.")
             return
+
         raise Problem("Unknown return code %s" % status)
 
-    def get_payment_process_response(self, order, urls):
+    def get_payment_process_response(self, service, order, urls):
         address = order.billing_address
         payment = Payment(
             order_number=order.identifier,
             reference_number=order.reference_number[:20],
             amount=str(int(order.taxful_total_price * 100)),
             delivery_date=(order.order_date.date() + datetime.timedelta(1)).strftime("%Y%m%d"),
-            return_url=urls["return"],
-            delayed_url=urls["return"],
-            cancel_url=urls["cancel"],
+            return_url=urls.return_url,
+            delayed_url=urls.return_url,
+            cancel_url=urls.cancel_url,
             message=force_text(order),
             contact=Contact(
                 first_name=flatten_unicode(address.first_name),
@@ -97,7 +106,7 @@ class CheckoutFiPaymentMethodModule(BasePaymentMethodModule):
             )
         )
         form = Form()
-        for key, value in self._get_checkout_object().get_offsite_button_data(payment).items():
+        for key, value in self._get_checkout_object(service).get_offsite_button_data(payment).items():
             form.fields[key] = CharField(initial=value, widget=HiddenInput)
         html = TEMPLATE % {"form": form}
         return HttpResponse(html)
