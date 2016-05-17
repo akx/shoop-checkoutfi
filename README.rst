@@ -13,9 +13,9 @@ Usage
   ``pip install <this_dir>``)
 * Add ``shoop_checkoutfi`` to your ``INSTALLED_APPS``
 * Restart your application server
-* Set "Checkout.fi" as the payment method module for a payment method.
-  Save changes.
-* Set the merchant ID and merchant secret.
+* Create a Checkout.fi payment processor in Shop Admin with proper
+  values for Merchant ID and Merchant Secret.
+* Create a new payment method for the payment processor.
 * All done! Payments with the payment method will go through
   Checkout.fi.
 
