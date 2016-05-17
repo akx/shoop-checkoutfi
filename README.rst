@@ -38,6 +38,7 @@ which is BSD licensed.
 License
 -------
 
+Copyright (c) 2016 Shoop Ltd.
 Copyright (c) 2015 Aarni Koskela
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
