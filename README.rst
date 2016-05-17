@@ -1,34 +1,40 @@
 shoop-checkoutfi
 ================
 
-A simple [Checkout.fi](http://www.checkout.fi/) payment module for
-the [Shoop](http://github.com/shoopio/shoop) e-commerce platform.
+A simple Checkout.fi_ payment module for the Shoop_ e-commerce platform.
+
+.. _Checkout.fi: http://www.checkout.fi/
+.. _Shoop: http://github.com/shoopio/shoop
 
 Usage
 -----
 
-* Install the package (should be installable via `pip install <this_dir>`)
-* Add `shoop_checkoutfi` to your `INSTALLED_APPS`
+* Install the package (should be installable via
+  ``pip install <this_dir>``)
+* Add ``shoop_checkoutfi`` to your ``INSTALLED_APPS``
 * Restart your application server
-* Set "Checkout.fi" as the payment method module for a payment method. Save changes.
+* Set "Checkout.fi" as the payment method module for a payment method.
+  Save changes.
 * Set the merchant ID and merchant secret.
-* All done! Payments with the payment method will go through Checkout.fi.
+* All done! Payments with the payment method will go through
+  Checkout.fi.
 
 Testing values
 --------------
 
 **Don't use these in production, silly.**
 
-* Merchant ID: `375917`
-* Merchant Secret: `SAIPPUAKAUPPIAS`
+* Merchant ID: ``375917``
+* Merchant Secret: ``SAIPPUAKAUPPIAS``
 
 Third-Party Licenses
 --------------------
 
-This package includes a vendored version of the
-[python-checkout](https://github.com/tuomasb/python-checkout) module, which
-is BSD licensed.
-  
+This package includes a vendored version of the python-checkout_ module,
+which is BSD licensed.
+
+.. _python-checkout: https://github.com/tuomasb/python-checkout
+
 License
 -------
 
