@@ -38,6 +38,9 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
     merchant_id = models.CharField(verbose_name="Merchant ID", max_length=128)
     merchant_secret = models.CharField(verbose_name="Merchant Secret", max_length=128)
 
+    class Meta:
+        verbose_name = _("Checkout.fi payment processor")
+
     def get_service_choices(self):
         return [
             ServiceChoice('checkoutfi', _("Checkout.fi"))
