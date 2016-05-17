@@ -9,7 +9,7 @@ except ImportError:
 if __name__ == '__main__':
     setuptools.setup(
         name="shoop-checkoutfi",
-        version="0.2",
+        version="0.3.0",
         description="Shoop Checkout.fi Integration",
         packages=setuptools.find_packages(),
         include_package_data=True,
