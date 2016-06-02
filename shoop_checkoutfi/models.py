@@ -21,7 +21,7 @@ TEMPLATE = """
 <body>
     <form action="https://payment.checkout.fi/" method="post">
         %(form)s
-        <input type="submit" value="Continue to Checkout.fi">
+        <input type="submit" value="%(continue_text)s">
     </form>
     <script>setTimeout(function(){document.forms[0].submit();}, 50);</script>
 </body>
@@ -35,8 +35,10 @@ def flatten_unicode(string):
 
 
 class CheckoutFiPaymentProcessor(PaymentProcessor):
-    merchant_id = models.CharField(verbose_name="Merchant ID", max_length=128)
-    merchant_secret = models.CharField(verbose_name="Merchant Secret", max_length=128)
+    merchant_id = models.CharField(
+        verbose_name=_("Merchant ID"), max_length=128)
+    merchant_secret = models.CharField(
+        verbose_name=_("Merchant Secret"), max_length=128)
 
     class Meta:
         verbose_name = _("Checkout.fi payment processor")
@@ -65,13 +67,13 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
         }
 
         if not all(fields.values()):
-            messages.warning(request, u"Arvoja puuttuu.")
+            messages.warning(request, _("Missing values"))
             return
 
         status = int(fields["status"])
 
         if status < 0:
-            messages.warning(request, u"Peruit maksamisen. Yritä uudestaan.")
+            messages.warning(request, _("Payment canceled. Try again."))
             return
 
         # these are approved statuses
@@ -81,13 +83,18 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
                 order.create_payment(
                     order.taxful_total_price,
                     payment_identifier="Checkout.fi %s" % payment_id,
-                    description="Checkout.fi %s (ref %s)" % (payment_id, fields["order_reference"])
+                    description=_(
+                        "Checkout.fi {payment_id} (ref {order_reference})"
+                    ).format(
+                        payment_id=payment_id,
+                        order_reference=fields["order_reference"]
+                    )
                 )
             else:
-                messages.warning(request, u"Maksun validointi epäonnistui.")
+                messages.warning(request, _("Payment validation failed."))
             return
 
-        raise Problem("Unknown return code %s" % status)
+        raise Problem(_("Unknown return code %s") % status)
 
     def get_payment_process_response(self, service, order, urls):
         address = order.billing_address
@@ -114,5 +121,8 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
         form = Form()
         for key, value in self._get_checkout_object(service).get_offsite_button_data(payment).items():
             form.fields[key] = CharField(initial=value, widget=HiddenInput)
-        html = TEMPLATE % {"form": form}
+        html = TEMPLATE % {
+            "form": form,
+            "continue_text": _("Continue to Checkout.fi"),
+        }
         return HttpResponse(html)
