@@ -8,7 +8,7 @@ except ImportError:
     shoop_setup_utils = None
 
 
-VERSION = '0.3.1'
+VERSION = '0.3.2'
 
 TOPDIR = os.path.abspath(os.path.dirname(__file__))
 VERSION_FILE = os.path.join(TOPDIR, 'shoop_checkoutfi', '_version.py')
