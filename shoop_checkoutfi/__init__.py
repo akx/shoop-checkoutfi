@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+try:
+    from ._version import __version__
+except ImportError:
+    __version__ = 'dev'
 
-__version__ = "0.2"
 default_app_config = "shoop_checkoutfi.apps.CheckoutFiConfig"
