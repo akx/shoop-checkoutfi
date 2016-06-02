@@ -1,3 +1,5 @@
+import os
+
 import setuptools
 
 try:
@@ -6,10 +8,18 @@ except ImportError:
     shoop_setup_utils = None
 
 
+VERSION = '0.3.1'
+
+TOPDIR = os.path.abspath(os.path.dirname(__file__))
+VERSION_FILE = os.path.join(TOPDIR, 'shoop_checkoutfi', '_version.py')
+
 if __name__ == '__main__':
+    if shoop_setup_utils:
+        shoop_setup_utils.write_version_to_file(VERSION, VERSION_FILE)
+
     setuptools.setup(
         name="shoop-checkoutfi",
-        version="0.3.1",
+        version=VERSION,
         description="Shoop Checkout.fi Integration",
         packages=setuptools.find_packages(),
         include_package_data=True,
