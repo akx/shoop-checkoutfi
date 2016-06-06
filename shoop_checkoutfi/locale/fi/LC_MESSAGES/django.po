@@ -22,10 +22,10 @@ msgid "Checkout.fi Payments Addon"
 msgstr "Checkout.fi-maksulisäosa"
 
 msgid "Merchant ID"
-msgstr "Kauppiaan tunnus"
+msgstr "Myyjän tunniste"
 
 msgid "Merchant Secret"
-msgstr "Kauppiaan salaisuus"
+msgstr "Myyjän turva-avain"
 
 msgid "Checkout.fi payment processor"
 msgstr "Checkout.fi-maksukäsittelijä"
