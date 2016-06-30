@@ -8,7 +8,7 @@ except ImportError:
     shuup_setup_utils = None
 
 
-VERSION = '0.3.3'
+VERSION = '0.5.0'
 
 TOPDIR = os.path.abspath(os.path.dirname(__file__))
 VERSION_FILE = os.path.join(TOPDIR, 'shuup_checkoutfi', '_version.py')
