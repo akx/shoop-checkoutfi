@@ -7,20 +7,20 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shoop', '0021_weight_based_pricing'),
+        ('shuup', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='CheckoutFiPaymentProcessor',
             fields=[
-                ('paymentprocessor_ptr', models.OneToOneField(parent_link=True, to='shoop.PaymentProcessor', auto_created=True, serialize=False, primary_key=True)),
+                ('paymentprocessor_ptr', models.OneToOneField(parent_link=True, to='shuup.PaymentProcessor', auto_created=True, serialize=False, primary_key=True)),
                 ('merchant_id', models.CharField(max_length=128, verbose_name='Merchant ID')),
                 ('merchant_secret', models.CharField(max_length=128, verbose_name='Merchant Secret')),
             ],
             options={
                 'abstract': False,
             },
-            bases=('shoop.paymentprocessor',),
+            bases=('shuup.paymentprocessor',),
         ),
     ]
