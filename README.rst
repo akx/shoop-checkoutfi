@@ -1,17 +1,17 @@
-shoop-checkoutfi
+shuup-checkoutfi
 ================
 
-A simple Checkout.fi_ payment module for the Shoop_ e-commerce platform.
+A simple Checkout.fi_ payment module for the Shuup_ e-commerce platform.
 
 .. _Checkout.fi: http://www.checkout.fi/
-.. _Shoop: http://github.com/shoopio/shoop
+.. _Shuup: http://github.com/shuup/shuup
 
 Usage
 -----
 
 * Install the package (should be installable via
   ``pip install <this_dir>``)
-* Add ``shoop_checkoutfi`` to your ``INSTALLED_APPS``
+* Add ``shuup_checkoutfi`` to your ``INSTALLED_APPS``
 * Restart your application server
 * Create a Checkout.fi payment processor in Shop Admin with proper
   values for Merchant ID and Merchant Secret.
@@ -38,7 +38,7 @@ which is BSD licensed.
 License
 -------
 
-Copyright (c) 2016 Shoop Ltd.
+Copyright (c) 2016 Shoop Commerce Ltd.
 Copyright (c) 2015 Aarni Koskela
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

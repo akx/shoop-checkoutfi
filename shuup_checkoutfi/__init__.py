@@ -3,4 +3,4 @@ try:
 except ImportError:
     __version__ = 'dev'
 
-default_app_config = "shoop_checkoutfi.apps.CheckoutFiConfig"
+default_app_config = "shuup_checkoutfi.apps.CheckoutFiConfig"

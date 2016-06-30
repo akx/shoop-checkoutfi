@@ -11,9 +11,9 @@ from django.http import HttpResponse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
-from shoop.core.models import PaymentProcessor, ServiceChoice
-from shoop.utils.excs import Problem
-from shoop_checkoutfi.checkoutfi import Checkout, Contact, Payment
+from shuup.core.models import PaymentProcessor, ServiceChoice
+from shuup.utils.excs import Problem
+from shuup_checkoutfi.checkoutfi import Checkout, Contact, Payment
 
 
 TEMPLATE = """
