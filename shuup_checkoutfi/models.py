@@ -57,13 +57,13 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
     def process_payment_return_request(self, service, order, request):
         checkout = self._get_checkout_object(service)
         fields = {
-            "version": request.REQUEST.get("VERSION"),
-            "order_number": request.REQUEST.get("STAMP"),
-            "order_reference": request.REQUEST.get("REFERENCE"),
-            "payment": request.REQUEST.get("PAYMENT"),
-            "status": request.REQUEST.get("STATUS"),
-            "algorithm": request.REQUEST.get("ALGORITHM"),
-            "mac": request.REQUEST.get("MAC"),
+            "version": request.GET.get("VERSION"),
+            "order_number": request.GET.get("STAMP"),
+            "order_reference": request.GET.get("REFERENCE"),
+            "payment": request.GET.get("PAYMENT"),
+            "status": request.GET.get("STATUS"),
+            "algorithm": request.GET.get("ALGORITHM"),
+            "mac": request.GET.get("MAC"),
         }
 
         if not all(fields.values()):
