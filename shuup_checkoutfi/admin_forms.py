@@ -2,6 +2,8 @@
 from django import forms
 
 from shuup.admin.forms import ShuupAdminForm
+from shuup.admin.modules.service_providers.forms import (ServiceWizardForm,
+                                                         ServiceWizardFormDef)
 
 from .models import CheckoutFiPaymentProcessor
 
@@ -9,8 +11,21 @@ from .models import CheckoutFiPaymentProcessor
 class CheckoutFiAdminForm(ShuupAdminForm):
     class Meta:
         model = CheckoutFiPaymentProcessor
-        fields = '__all__'
+        exclude = []
         widgets = {
-            'secret_key': forms.PasswordInput(render_value=True),
-            'publishable_key': forms.PasswordInput(render_value=True),
+            'merchant_id': forms.PasswordInput(render_value=True),
+            'merchant_secret': forms.PasswordInput(render_value=True),
         }
+
+
+class CheckoutFiWizardForm(CheckoutFiAdminForm, ServiceWizardForm):
+    pass
+
+
+class CheckoutFiWizardFormDef(ServiceWizardFormDef):
+    def __init__(self):
+        super(CheckoutFiWizardFormDef, self).__init__(
+            name="checkoutfi",
+            form_class=CheckoutFiWizardForm,
+            template_name="shuup/checkoutfi/wizard_form.jinja"
+        )
