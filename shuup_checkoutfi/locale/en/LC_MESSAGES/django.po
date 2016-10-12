@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 13:06+0000\n"
+"POT-Creation-Date: 2016-10-11 23:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,4 +50,15 @@ msgid "Unknown return code %s"
 msgstr ""
 
 msgid "Continue to Checkout.fi"
+msgstr ""
+
+#, python-format
+msgid ""
+"Accept credit cards using <a target='_blank' href='%(url)s'>Checkout.fi</a>"
+msgstr ""
+
+msgid "Don't have an account?"
+msgstr ""
+
+msgid "Register now"
 msgstr ""
