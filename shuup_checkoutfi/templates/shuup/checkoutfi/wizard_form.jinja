@@ -3,7 +3,8 @@
 {% call service_provider_section(
     identifier=form_def.name,
     header="Checkout.fi",
-    description=gettext("Accept credit cards using <a target='_blank' href='%(url)s'>Checkout.fi</a>", url="http://www.checkout.fi")
+    description=gettext("Accept credit cards using <a target='_blank' href='%(url)s'>Checkout.fi</a>. Checkout.fi is one of the largest Finnish payment service providers and supports bank payments, Visa, and Mastercard.", url="http://www.checkout.fi"),
+    allowed_countries="FI"
 )%}
     {% set form = pane.forms[form_def.name] %}
     <input type="hidden" name="{{ form.name.html_name }}" value="Checkout.fi">
