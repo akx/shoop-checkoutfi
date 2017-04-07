@@ -1,6 +1,8 @@
-try:
-    from ._version import __version__
-except ImportError:
-    __version__ = 'dev'
+import pkg_resources
 
-default_app_config = "shuup_checkoutfi.apps.CheckoutFiConfig"
+try:
+    __version__ = pkg_resources.get_distribution(__name__).version
+except pkg_resources.DistributionNotFound:  # pragma: no cover
+    __version__ = None
+
+default_app_config = __name__ + '.apps.CheckoutFiConfig'
