@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-22 15:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Checkout.fi Payments Addon"
+msgstr "Checkout.fi-betalningstillägg"
+
+msgid "Merchant ID"
+msgstr "Försäljarens ID"
+
+msgid "Merchant Secret"
+msgstr "Försäljarens hemlighet"
+
+msgid "Checkout.fi payment processor"
+msgstr "Checkout.fi-betalningshanterare"
+
+msgid "Checkout.fi"
+msgstr "Checkout.fi"
+
+msgid "Missing values"
+msgstr "Värden fattas"
+
+msgid "Payment canceled. Try again."
+msgstr "Betalning annulerad. Gör ett nytt försök."
+
+#, python-brace-format
+msgid "Checkout.fi {payment_id} (ref {order_reference})"
+msgstr "Checkout.fi {payment_id} (referens {order_reference})"
+
+msgid "Payment validation failed."
+msgstr "Validering av betalning misslyckades."
+
+#, python-format
+msgid "Unknown return code %s"
+msgstr "Okännt returvärde %s"
+
+msgid "Continue to Checkout.fi"
+msgstr "Fortsätt till Checkout.fi"
+
+#, python-format
+msgid ""
+"Accept credit cards using <a target='_blank' href='%(url)s'>Checkout.fi</a>. "
+"Checkout.fi is one of the largest Finnish payment service providers and "
+"supports bank payments, Visa, and Mastercard."
+msgstr ""
+"Godkänn kreditkort <a target='_blank' href='%(url)s'>Checkout.fi</a>. "
+"Checkout.fi är Finlands ledande inhemska betalningsförmedlare och stöder"
+"betalning via bank, Visa, och Mastercard."
+
+msgid "Don't have an account?"
+msgstr "Inget konto?"
+
+msgid "Register now"
+msgstr "Registrera nu"
