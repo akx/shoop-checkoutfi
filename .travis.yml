@@ -1,0 +1,16 @@
+sudo: false
+language: python
+cache: pip
+python:
+  - "3.4"
+install:
+  - pip install -U pip setuptools
+  - pip install codecov
+  - pip install shuup
+  - pip install -r requirements-test.txt
+script:
+  - flake8 shuup_checkoutfi/
+  - isort --check-only
+  - py.test -ra -vvv --nomigrations shuup_checkoutfi_tests --cov shuup_checkoutfi
+after_success:
+  - codecov

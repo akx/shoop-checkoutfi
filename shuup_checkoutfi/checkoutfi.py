@@ -41,6 +41,7 @@
 import hashlib
 import hmac
 import xml.etree.ElementTree as ET
+
 import requests
 
 __version__ = '0.2.0'
@@ -245,7 +246,7 @@ class Checkout(object):
         """
         self.merchant_id = merchant_id
         self.merchant_secret = merchant_secret
-        self.session = requests.Session()
+        self.session = requests.Session()  # noqa
 
     def get_onsite_button_data(self, payment):
         """
@@ -281,7 +282,7 @@ class Checkout(object):
         :param xmlraw: Raw XML data returned by checkout.fi
         """
         payment_list = []
-        XML = ET.fromstring(xmlraw)
+        XML = ET.fromstring(xmlraw)  # noqa
         banks = XML.findall(".//payment/banks/*")
         for bank in banks:
             bankdict = dict(bank.items())

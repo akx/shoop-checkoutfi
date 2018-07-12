@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from shuup.admin.forms import ShuupAdminForm
-from shuup.admin.modules.service_providers.wizard_form_defs import (
+from shuup.admin.modules.service_providers.wizard_form_defs import \
     ServiceWizardFormDef
-)
-from shuup.admin.modules.service_providers.wizard_forms import (
+from shuup.admin.modules.service_providers.wizard_forms import \
     ServiceWizardForm
-)
 
 from .models import CheckoutFiPaymentProcessor
 
