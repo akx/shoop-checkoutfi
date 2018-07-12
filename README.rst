@@ -1,3 +1,13 @@
+.. image:: https://travis-ci.org/shuup/shuup-checkoutfi.svg?branch=master
+  :target: https://travis-ci.org/shuup/shuup-checkoutfi
+
+.. image:: https://codecov.io/gh/shuup/shuup-checkoutfi/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/shuup/shuup-checkoutfi
+
+.. image:: https://img.shields.io/pypi/v/shuup-checkoutfi.svg
+  :alt: PyPI
+  :target: https://pypi.org/project/shuup-checkoutfi/
+
 shuup-checkoutfi
 ================
 
