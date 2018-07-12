@@ -27,6 +27,27 @@ Testing values
 * Merchant ID: ``375917``
 * Merchant Secret: ``SAIPPUAKAUPPIAS``
 
+Running tests
+-------------
+
+You can run tests with `py.test <http://pytest.org/>`_.
+
+Requirements for running tests:
+
+* Your virtualenv needs to have Shuup installed.
+
+* Project root must be in the Python path.  This can be done with:
+
+  .. code:: sh
+
+     pip install -e .
+
+To run tests, use command:
+
+.. code:: sh
+
+   py.test -v shuup_checkoutfi_tests
+
 Third-Party Licenses
 --------------------
 
