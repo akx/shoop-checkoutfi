@@ -10,9 +10,9 @@ from django.forms import CharField, Form, HiddenInput
 from django.http import HttpResponse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
-
 from shuup.core.models import PaymentProcessor, ServiceChoice
 from shuup.utils.excs import Problem
+
 from shuup_checkoutfi.checkoutfi import Checkout, Contact, Payment
 
 

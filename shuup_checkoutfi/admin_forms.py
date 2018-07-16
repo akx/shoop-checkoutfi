@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from shuup.admin.forms import ShuupAdminForm
-from shuup.admin.modules.service_providers.wizard_form_defs import (
+from shuup.admin.modules.service_providers.wizard_form_defs import \
     ServiceWizardFormDef
-)
-from shuup.admin.modules.service_providers.wizard_forms import (
+from shuup.admin.modules.service_providers.wizard_forms import \
     ServiceWizardForm
-)
-from shuup.core.models import PaymentMethod, Shop
 
 from .models import CheckoutFiPaymentProcessor
 
@@ -36,13 +33,15 @@ class CheckoutFiWizardForm(CheckoutFiAdminForm, ServiceWizardForm):
 
 
 class CheckoutFiWizardFormDef(ServiceWizardFormDef):
-    def __init__(self):
+    def __init__(self, request):
+        self.request = request
         super(CheckoutFiWizardFormDef, self).__init__(
             name="checkoutfi",
             form_class=CheckoutFiWizardForm,
-            template_name="shuup/checkoutfi/wizard_form.jinja"
+            template_name="shuup/checkoutfi/wizard_form.jinja",
+            request=request
         )
 
     def visible(self):
-        shop = Shop.objects.first()
+        shop = self.request.shop
         return not shop or not shop.contact_address or shop.contact_address.country == "FI"
