@@ -31,7 +31,7 @@ DATABASES = {
         ),
     }
 }
-
+SHUUP_DISCOUNT_MODULES = []
 
 class DisableMigrations(object):
     def __contains__(self, item):

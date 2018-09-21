@@ -10,11 +10,11 @@ from django.forms import CharField, Form, HiddenInput
 from django.http import HttpResponse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
+from shuup.core.excs import NoPaymentToCreateException
 from shuup.core.models import PaymentProcessor, ServiceChoice
 from shuup.utils.excs import Problem
 
 from shuup_checkoutfi.checkoutfi import Checkout, Contact, Payment
-
 
 TEMPLATE = """
 <html>
@@ -80,16 +80,20 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
         if status in (2, 3, 5, 6, 8, 9, 10):
             if checkout.validate_payment_return(**fields):
                 payment_id = fields["payment"]
-                order.create_payment(
-                    order.taxful_total_price,
-                    payment_identifier="Checkout.fi %s" % payment_id,
-                    description=_(
-                        "Checkout.fi {payment_id} (ref {order_reference})"
-                    ).format(
-                        payment_id=payment_id,
-                        order_reference=fields["order_reference"]
+                try:
+                    order.create_payment(
+                        order.taxful_total_price,
+                        payment_identifier="Checkout.fi %s" % payment_id,
+                        description=_(
+                            "Checkout.fi {payment_id} (ref {order_reference})"
+                        ).format(
+                            payment_id=payment_id,
+                            order_reference=fields["order_reference"]
+                        )
                     )
-                )
+                # order already paid, move on..
+                except NoPaymentToCreateException:
+                    pass
             else:
                 messages.warning(request, _("Payment validation failed."))
             return
