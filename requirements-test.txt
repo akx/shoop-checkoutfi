@@ -3,4 +3,5 @@ pytest-cov
 pytest-django>=3.0.0
 flake8>=3.3.0
 isort>=4.2.5
+mock
 -e .
