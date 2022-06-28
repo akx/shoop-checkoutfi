@@ -1,11 +1,12 @@
 import setuptools
 
+try:
+    import shuup_setup_utils
+except ImportError:
+    shuup_setup_utils = None
+
+
 if __name__ == '__main__':
     setuptools.setup(
-        name="shoop-checkoutfi",
-        version="0.1",
-        description="Shoop Checkout.fi Integration",
-        packages=["shoop_checkoutfi"],
-        include_package_data=True,
-        entry_points={"shoop.addon": "shoop_checkoutfi=shoop_checkoutfi"}
-    )
+        cmdclass=(shuup_setup_utils.COMMANDS if shuup_setup_utils else {}),
+        setup_requires=['setuptools>=34.0', 'setuptools-gitver>=1.1.0', 'shuup>=1,<2'])

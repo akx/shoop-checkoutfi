@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-22 15:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Checkout.fi Payments Addon"
+msgstr "Checkout.fi-maksulisäosa"
+
+msgid "Merchant ID"
+msgstr "Myyjän tunniste"
+
+msgid "Merchant Secret"
+msgstr "Myyjän turva-avain"
+
+msgid "Checkout.fi payment processor"
+msgstr "Checkout.fi-maksukäsittelijä"
+
+msgid "Checkout.fi"
+msgstr "Checkout.fi"
+
+msgid "Missing values"
+msgstr "Arvoja puuttuu"
+
+msgid "Payment canceled. Try again."
+msgstr "Peruit maksamisen. Yritä uudestaan."
+
+#, python-brace-format
+msgid "Checkout.fi {payment_id} (ref {order_reference})"
+msgstr "Checkout.fi {payment_id} (viite {order_reference})"
+
+msgid "Payment validation failed."
+msgstr "Maksun validointi epäonnistui."
+
+#, python-format
+msgid "Unknown return code %s"
+msgstr "Tuntematon paluuarvo %s"
+
+msgid "Continue to Checkout.fi"
+msgstr "Siirry maksamaan Checkoutissa"
+
+#, python-format
+msgid ""
+"Accept credit cards using <a target='_blank' href='%(url)s'>Checkout.fi</a>. "
+"Checkout.fi is one of the largest Finnish payment service providers and "
+"supports bank payments, Visa, and Mastercard."
+msgstr ""
+"Hyväksy verkkomaksut <a target='_blank' href='%(url)s'>Checkout.fi</a>. "
+"Checkout.fi on Suomen johtava kotimainen maksuvälittäjä ja sisältää  "
+"pankkien maksupainikkeet sekä Visa- ja Mastercard-kortit."
+
+msgid "Don't have an account?"
+msgstr "Ei tiliä?"
+
+msgid "Register now"
+msgstr "Rekisteröidy nyt"
