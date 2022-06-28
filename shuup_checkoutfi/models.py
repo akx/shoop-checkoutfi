@@ -9,7 +9,7 @@ from django.db import models
 from django.forms import CharField, Form, HiddenInput
 from django.http import HttpResponse
 from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from shuup.core.excs import NoPaymentToCreateException
 from shuup.core.models import PaymentProcessor, ServiceChoice
 from shuup.utils.excs import Problem
@@ -35,18 +35,16 @@ def flatten_unicode(string):
 
 
 class CheckoutFiPaymentProcessor(PaymentProcessor):
-    merchant_id = models.CharField(
-        verbose_name=_("Merchant ID"), max_length=128)
+    merchant_id = models.CharField(verbose_name=_("Merchant ID"), max_length=128)
     merchant_secret = models.CharField(
-        verbose_name=_("Merchant Secret"), max_length=128)
+        verbose_name=_("Merchant Secret"), max_length=128
+    )
 
     class Meta:
         verbose_name = _("Checkout.fi payment processor")
 
     def get_service_choices(self):
-        return [
-            ServiceChoice('checkoutfi', _("Checkout.fi"))
-        ]
+        return [ServiceChoice("checkoutfi", _("Checkout.fi"))]
 
     def _get_checkout_object(self, service):
         return Checkout(
@@ -88,8 +86,8 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
                             "Checkout.fi {payment_id} (ref {order_reference})"
                         ).format(
                             payment_id=payment_id,
-                            order_reference=fields["order_reference"]
-                        )
+                            order_reference=fields["order_reference"],
+                        ),
                     )
                 # order already paid, move on..
                 except NoPaymentToCreateException:
@@ -106,7 +104,9 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
             order_number=order.identifier,
             reference_number=order.reference_number[:20],
             amount=str(int(order.taxful_total_price * 100)),
-            delivery_date=(order.order_date.date() + datetime.timedelta(1)).strftime("%Y%m%d"),
+            delivery_date=(order.order_date.date() + datetime.timedelta(1)).strftime(
+                "%Y%m%d"
+            ),
             return_url=urls.return_url,
             delayed_url=urls.return_url,
             cancel_url=urls.cancel_url,
@@ -119,11 +119,13 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
                 address=flatten_unicode(address.street),
                 postcode=address.postal_code,
                 postoffice=flatten_unicode(address.city),
-                country=address.country.alpha3
-            )
+                country=address.country.alpha3,
+            ),
         )
         form = Form()
-        for key, value in self._get_checkout_object(service).get_offsite_button_data(payment).items():
+        for key, value in (
+            self._get_checkout_object(service).get_offsite_button_data(payment).items()
+        ):
             form.fields[key] = CharField(initial=value, widget=HiddenInput)
         html = TEMPLATE % {
             "form": form,

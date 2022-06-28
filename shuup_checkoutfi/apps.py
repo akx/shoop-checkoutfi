@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from shuup.apps import AppConfig
 
 
@@ -12,5 +12,5 @@ class CheckoutFiConfig(AppConfig):
         ],
         "payment_processor_wizard_form_def": [
             "shuup_checkoutfi.admin_forms:CheckoutFiWizardFormDef"
-        ]
+        ],
     }
