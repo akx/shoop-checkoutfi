@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.db import models
 from django.forms import CharField, Form, HiddenInput
 from django.http import HttpResponse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from shuup.core.excs import NoPaymentToCreateException
 from shuup.core.models import PaymentProcessor, ServiceChoice
@@ -30,8 +30,8 @@ TEMPLATE = """
 
 
 def flatten_unicode(string):
-    string = force_text(string)
-    return force_text(unicodedata.normalize("NFKD", string).encode("ascii", "ignore"))
+    string = force_str(string)
+    return force_str(unicodedata.normalize("NFKD", string).encode("ascii", "ignore"))
 
 
 class CheckoutFiPaymentProcessor(PaymentProcessor):
@@ -110,7 +110,7 @@ class CheckoutFiPaymentProcessor(PaymentProcessor):
             return_url=urls.return_url,
             delayed_url=urls.return_url,
             cancel_url=urls.cancel_url,
-            message=force_text(order),
+            message=force_str(order),
             contact=Contact(
                 first_name=flatten_unicode(address.first_name),
                 last_name=flatten_unicode(address.last_name),
